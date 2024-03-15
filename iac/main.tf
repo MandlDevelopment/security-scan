@@ -11,6 +11,9 @@ resource "aws_instance" "example" {
     tags = {    
         Name = "example-instance"  
     }
+  metadata_options {
+    http_tokens = "required"
+  }
 }
 output "public_ip" {  
     value = aws_instance.example.public_ip
