@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
+      - name: Check the workspace path
+        run: echo "The workspace path is $GITHUB_WORKSPACE"
 
       - name: Run Bridgecrew Action
         id: Bridgecrew
