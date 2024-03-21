@@ -36,7 +36,8 @@ jobs:
           PRISMA_API_URL: ${{ vars.PRISMA_API_URL }}
         with:
           api-key: ${{ secrets.PC_ACCESS_KEY }}::${{ secrets.PC_SECRET_KEY }}
-          file: iac/sample.tf
+          directory: iac/
+          #file: iac/sample.tf
           
           
           
