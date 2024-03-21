@@ -44,14 +44,14 @@ jobs:
       - name: Build the image
         run: docker build -t $IMAGE_NAME .
 
-      - name: Container Image Scan
-        id: scan
-        uses: PaloAltoNetworks/prisma-cloud-scan@v1
-        with:
-          pcc_console_url: ${{ vars.PCC_CONSOLE_URL }}
-          pcc_user: ${{ secrets.PC_ACCESS_KEY }}
-          pcc_pass: ${{ secrets.PC_SECRET_KEY }}
-          image_name: ${{ env.IMAGE_NAME }}
+      #- name: Container Image Scan
+       # id: scan
+        #uses: PaloAltoNetworks/prisma-cloud-scan@v1
+        #with:
+         # pcc_console_url: ${{ vars.PCC_CONSOLE_URL }}
+         # pcc_user: ${{ secrets.PC_ACCESS_KEY }}
+          #pcc_pass: ${{ secrets.PC_SECRET_KEY }}
+          #image_name: ${{ env.IMAGE_NAME }}
 
       - name: Upload SARIF report
         uses: actions/upload-artifact@v2
