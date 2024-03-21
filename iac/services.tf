@@ -10,7 +10,8 @@ resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/16"
  
   tags = {
-    Name = "my-vpc"
+    Name      = "my-vpc"
+    yor_trace = "db7dfc12-0e81-4091-8b21-e8817dceae26"
   }
 }
 
@@ -19,29 +20,32 @@ resource "aws_internet_gateway" "my_igw" {
   vpc_id = aws_vpc.my_vpc.id
 
   tags = {
-    Name = "my-internet-gateway"
+    Name      = "my-internet-gateway"
+    yor_trace = "2869f193-80c8-4e96-a7a3-4b3d37b4b1aa"
   }
 }
 
 # Create a subnet within the VPC
 resource "aws_subnet" "my_subnet" {
-  vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "10.0.1.0/24"
+  vpc_id                  = aws_vpc.my_vpc.id
+  cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "my-subnet"
+    Name      = "my-subnet"
+    yor_trace = "5cd40a7a-e89b-4f4d-9ffc-607ec34087d9"
   }
 }
 
 # Specify an AWS EC2 instance
 resource "aws_instance" "my_instance" {
   ami           = "ami-0c55b159cbfafe1f0" # Example AMI ID, you should use an AMI ID that matches your requirements
-  instance_type = "t2.micro"             # Specifies the instance type
+  instance_type = "t2.micro"              # Specifies the instance type
 
-  subnet_id = aws_subnet.my_subnet.id    # Associates the instance with the subnet
+  subnet_id = aws_subnet.my_subnet.id # Associates the instance with the subnet
 
   tags = {
-    Name = "MyInstance"
+    Name      = "MyInstance"
+    yor_trace = "b72ab96c-6742-4085-9d93-eadf26998f77"
   }
 }
