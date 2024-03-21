@@ -36,7 +36,7 @@ jobs:
           PRISMA_API_URL: ${{ vars.PRISMA_API_URL }}
         with:
           api-key: ${{ secrets.PC_ACCESS_KEY }}::${{ secrets.PC_SECRET_KEY }}
-          file: MandlDevelopment/security-scan/iac/sample.tf
+          file: iac/sample.tf
           
           
           
