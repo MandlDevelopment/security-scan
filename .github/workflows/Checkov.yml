@@ -6,10 +6,10 @@ name: Prisma Cloud Checkov Scan
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
- 
+
 env:
   IMAGE_NAME: demo:latest
- 
+
 jobs:
   checkov-scan:
     name: Scan Repo with checkov
@@ -30,9 +30,8 @@ jobs:
           PRISMA_API_URL: ${{ vars.PRISMA_API_URL }}
         with:
           api-key: ${{ secrets.PC_ACCESS_KEY }}::${{ secrets.PC_SECRET_KEY }}
-          #directory: iac/
-          use_enforcement_rules: false
-          #file: iac/sample.tf
+          quiet: true  # only show failed
+          use_enforcement_rules: false # optional - use enforcement rule configs from the platform
           
       - name: Upload SARIF report
         uses: actions/upload-artifact@v2
