@@ -33,6 +33,7 @@ jobs:
         with:
           api-key: ${{ secrets.PC_ACCESS_KEY }}::${{ secrets.PC_SECRET_KEY }}
           directory: iac/
+          use_enforcement_rules: false
           #file: iac/sample.tf
           
           
