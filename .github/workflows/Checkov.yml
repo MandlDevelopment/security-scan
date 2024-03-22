@@ -9,7 +9,7 @@ on:
  
 env:
   IMAGE_NAME: demo:latest
-
+ 
 jobs:
   checkov-scan:
     name: Scan Repo with checkov
