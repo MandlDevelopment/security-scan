@@ -51,7 +51,7 @@ resource "aws_subnet" "my_subnet" {
 
 # Specify an AWS EC2 instance
 resource "aws_instance" "my_instance" {
-  ami           = "ami-0c55b159cbfafe1f0" # Example AMI ID, you should use an AMI ID that matches your requirements
+  ami           = "ami-0c101f26f147fa7fd" # Example AMI ID, you should use an AMI ID that matches your requirements
   instance_type = "t2.micro"              # Specifies the instance type
 
   subnet_id = aws_subnet.my_subnet.id # Associates the instance with the subnet
