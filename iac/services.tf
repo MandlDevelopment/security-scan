@@ -48,4 +48,8 @@ resource "aws_instance" "my_instance" {
     Name      = "MyInstance"
     yor_trace = "b72ab96c-6742-4085-9d93-eadf26998f77"
   }
+  metadata_options {
+    http_tokens = "required"
+  }
 }
+

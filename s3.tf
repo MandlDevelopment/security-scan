@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "my_bucket" {
   bucket = "bucket6960" # Ensure this is unique
-  acl    = "private" # Defines the access control level
+  acl    = "public" # Defines the access control level
 
   tags = {
     Name        = "My Terraform S3 Bucket"
