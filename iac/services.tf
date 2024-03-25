@@ -4,6 +4,18 @@ provider "aws" {
   version = "~> 3.0"    # Specifies the version of the AWS provider you want to use
 }
 
+#create a new S3 Bucket
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "bucket6960" # Ensure this is unique
+  acl    = "public" # Defines the access control level
+
+  tags = {
+    Name        = "My Terraform S3 Bucket"
+    yor_trace =   "db7dfc12-0e81-4091-8b21-e8817dceae28"
+    Environment = "Dev"
+  }
+}
+
 # Create a new instance of the VPC resource
 resource "aws_vpc" "my_vpc" {
   # checkov:skip=CKV2_AWS_11: ADD REASON
