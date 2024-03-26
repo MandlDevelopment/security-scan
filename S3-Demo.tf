@@ -7,7 +7,7 @@ resource aws_s3_bucket my_bucket {
   acl    = private
 
   tags = {
-    Name        = My bucket
+    Name        = Prisma Demo
     Environment = Dev
   }
 }
