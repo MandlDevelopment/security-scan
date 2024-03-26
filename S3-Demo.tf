@@ -10,6 +10,18 @@ resource "aws_s3_bucket" "example_bucket" {
     Name = "Example Bucket"
   }
 }
+
+resource "aws_s3_bucket" "example_bucket_log_bucket" {
+  bucket = "example_bucket-log-bucket"
+}
+
+resource "aws_s3_bucket_logging" "example_bucket" {
+  bucket = aws_s3_bucket.example_bucket.id
+
+  target_bucket = aws_s3_bucket.example_bucket_log_bucket.id
+  target_prefix = "log/"
+}
+
  
 resource "aws_s3_bucket_policy" "example_bucket_policy" {
   bucket = aws_s3_bucket.example_bucket.id
