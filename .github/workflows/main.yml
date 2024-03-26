@@ -27,12 +27,12 @@ jobs:
           name: SARIF results Checkov
           path: results.sarif
 
-      # Only for public repos or enterprise accounts
-      # Uploads results.sarif to GitHub repository using the upload-sarif action
-    - uses: github/codeql-action/upload-sarif@v2
-      with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: results.sarif
+    #   # Only for public repos or enterprise accounts
+    #   # Uploads results.sarif to GitHub repository using the upload-sarif action
+    # - uses: github/codeql-action/upload-sarif@v2
+    #   with:
+    #       # Path to SARIF file relative to the root of the repository
+    #       sarif_file: results.sarif
 
   
     - name: Set up AWS credentials
