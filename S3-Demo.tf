@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "sample_bucket" {
 }
 
 resource "aws_s3_bucket_policy" "example_bucket_policy" {
-  bucket = aws_s3_bucket.example_bucket.id
+  bucket = aws_s3_bucket.sample_bucket.id
 
   policy = jsonencode({
     Version = "2012-10-17",
@@ -20,7 +20,7 @@ resource "aws_s3_bucket_policy" "example_bucket_policy" {
       Effect    = "Allow",
       Principal = "*",
       Action    = "s3:GetObject",
-      Resource  = aws_s3_bucket.example_bucket.arn
+      Resource  = aws_s3_bucket.sample_bucket.arn
     }]
   })
 }
