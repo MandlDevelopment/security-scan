@@ -11,6 +11,30 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Run Bridgecrew Action
+      id: Bridgecrew
+      uses: bridgecrewio/checkov-action@master
+      env:
+          PRISMA_API_URL: ${{ vars.PRISMA_API_URL }}
+      with:
+          api-key: ${{ secrets.PC_ACCESS_KEY }}::${{ secrets.PC_SECRET_KEY }}
+          quiet: true  # only show failed
+          use_enforcement_rules: true # optional - use enforcement rule configs from the platform
+          
+    - name: Upload SARIF report
+      uses: actions/upload-artifact@v2
+      with:
+          name: SARIF results Checkov
+          path: results.sarif
+
+      # Only for public repos or enterprise accounts
+      # Uploads results.sarif to GitHub repository using the upload-sarif action
+    - uses: github/codeql-action/upload-sarif@v2
+      with:
+          # Path to SARIF file relative to the root of the repository
+          sarif_file: results.sarif
+
+  
     - name: Set up AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
