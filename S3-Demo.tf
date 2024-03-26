@@ -3,7 +3,7 @@ provider "aws" {
 }
  
 resource "aws_s3_bucket" "example_bucket" {
-  bucket = "your-bucket-name" # Change this to your desired bucket name
+  bucket = "Prisma-Cloud" # Change this to your desired bucket name
   acl    = "public-read"      # Grant public read access to the bucket
  
   tags = {
