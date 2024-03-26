@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "example_bucket" {
   bucket = "prisma-bucket" # Change this to your desired bucket name
-  acl    = "public-read"      # Grant public read access to the bucket
+  #acl    = "public-read"      # Grant public read access to the bucket
 
   tags = {
     Name = "Example Bucket"
@@ -23,4 +23,13 @@ resource "aws_s3_bucket_policy" "example_bucket_policy" {
       Resource  = aws_s3_bucket.example_bucket.arn
     }]
   })
+}
+
+resource "aws_s3_bucket_acl" "example_bucket_acl" {
+  bucket = aws_s3_bucket.example_bucket.id
+
+  acl {
+    permission = "public-read"
+    grantee    = "all_users"
+  }
 }
