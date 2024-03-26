@@ -7,12 +7,13 @@ provider "aws" {
 #create a new S3 Bucket
 resource "aws_s3_bucket" "my_bucket" {
   bucket = "bucket6960" # Ensure this is unique
-  acl    = "private" # Defines the access control level
+  acl    = "private"    # Defines the access control level
 
   tags = {
     Name        = "My Terraform S3 Bucket"
-    yor_trace =   "db7dfc12-0e81-4091-8b21-e8817dceae28"
+    yor_trace   = "db7dfc12-0e81-4091-8b21-e8817dceae28"
     Environment = "Dev"
+    yor_name    = "my_bucket"
   }
 }
 
@@ -20,10 +21,11 @@ resource "aws_s3_bucket" "my_bucket" {
 resource "aws_vpc" "my_vpc" {
   # checkov:skip=CKV2_AWS_11: ADD REASON
   cidr_block = "10.0.0.0/16"
- 
+
   tags = {
     Name      = "my-vpc"
     yor_trace = "db7dfc12-0e81-4091-8b21-e8817dceae26"
+    yor_name  = "my_vpc"
   }
 }
 
@@ -34,6 +36,7 @@ resource "aws_internet_gateway" "my_igw" {
   tags = {
     Name      = "my-internet-gateway"
     yor_trace = "2869f193-80c8-4e96-a7a3-4b3d37b4b1aa"
+    yor_name  = "my_igw"
   }
 }
 
@@ -46,6 +49,7 @@ resource "aws_subnet" "my_subnet" {
   tags = {
     Name      = "my-subnet"
     yor_trace = "5cd40a7a-e89b-4f4d-9ffc-607ec34087d9"
+    yor_name  = "my_subnet"
   }
 }
 
@@ -59,5 +63,6 @@ resource "aws_instance" "my_instance" {
   tags = {
     Name      = "MyInstance"
     yor_trace = "b72ab96c-6742-4085-9d93-eadf26998f77"
+    yor_name  = "my_instance"
   }
 }
