@@ -41,7 +41,7 @@ resource "aws_internet_gateway" "my_igw" {
 resource "aws_subnet" "my_subnet" {
   vpc_id                  = aws_vpc.my_vpc.id
   cidr_block              = "10.0.1.0/24"
-  
+
   map_public_ip_on_launch = true
 
   tags = {
@@ -53,7 +53,7 @@ resource "aws_subnet" "my_subnet" {
 # Specify an AWS EC2 instance
 resource "aws_instance" "my_instance" {
   ami           = "ami-0c101f26f147fa7fd" # Example AMI ID, you should use an AMI ID that matches your requirements
-  instance_type = "t2.micro"              # Specifies the instance type
+  instance_type = "t3.micro"              # Specifies the instance type
 
   subnet_id = aws_subnet.my_subnet.id # Associates the instance with the subnet
 
