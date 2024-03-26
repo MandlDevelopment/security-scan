@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "demo_bucket" {
-  bucket = "prisma-bucket" # Change this to your desired bucket name
+  bucket = "prisma-bucket-69" # Change this to your desired bucket name
   #acl    = "private"      # Grant public read access to the bucket
 
   tags = {
