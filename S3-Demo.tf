@@ -2,12 +2,12 @@ provider "aws" {
   region = "us-west-2" # Change this to your desired region
 }
 
-resource "aws_s3_bucket" "example_bucket" {
+resource "aws_s3_bucket" "sample_bucket" {
   bucket = "prisma-bucket" # Change this to your desired bucket name
   #acl    = "private"      # Grant public read access to the bucket
 
   tags = {
-    Name = "Example Bucket"
+    Name = "sample Bucket"
   }
 }
 
