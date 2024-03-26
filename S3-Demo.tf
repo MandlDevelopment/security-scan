@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-west-2" # Change this to your desired region
 }
  
-resource "aws_s3_bucket" "example_bucket" {
+resource "aws_s3_bucket" "Prisma-Cloud" {
   bucket = "Prisma-Cloud" # Change this to your desired bucket name
   acl    = "public-read"      # Grant public read access to the bucket
  
@@ -18,7 +18,7 @@ resource "aws_s3_bucket" "example_bucket_log_bucket" {
 resource "aws_s3_bucket_logging" "example_bucket" {
   bucket = aws_s3_bucket.example_bucket.id
 
-  target_bucket = aws_s3_bucket.example_bucket_log_bucket.id
+  target_bucket = aws_s3_bucket.example_bucket-log-bucket.id
   target_prefix = "log/"
 }
 
