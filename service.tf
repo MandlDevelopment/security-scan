@@ -17,16 +17,6 @@ resource "aws_s3_bucket" "my_bucket" {
 }
 
 
-resource "aws_s3_bucket" "my_bucket_log_bucket" {
-  bucket = "my_bucket-log-bucket"
-}
-
-resource "aws_s3_bucket_logging" "my_bucket" {
-  bucket = aws_s3_bucket.my_bucket.id
-
-  target_bucket = aws_s3_bucket.my_bucket_log_bucket.id
-  target_prefix = "log/"
-}
 
 
 
