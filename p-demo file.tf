@@ -52,15 +52,12 @@ resource "aws_subnet" "my_subnet" {
 # Specify an AWS EC2 instance
 resource "aws_instance" "my_instance" {
   ami           = "ami-0c101f26f147fa7fd" # Example AMI ID, you should use an AMI ID that matches your requirements
-  instance_type = "t2.micro"              # Specifies the instance type
+  instance_type = "t3.micro"              # Specifies the instance type
 
   subnet_id = aws_subnet.my_subnet.id # Associates the instance with the subnet
 
   tags = {
     Name      = "MyInstance"
     yor_trace = "b72ab96c-6742-4085-9d93-eadf26998f77"
-  }
-  metadata_options {
-    http_tokens = "required"
   }
 }
