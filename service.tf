@@ -18,10 +18,6 @@ resource "aws_s3_bucket" "my_bucket" {
 }
 
 
-
-
-
-
 # Create a new instance of the VPC resource
 resource "aws_vpc" "my_vpc" {
   # checkov:skip=CKV2_AWS_11: ADD REASON
