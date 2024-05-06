@@ -5,9 +5,9 @@ provider "aws" {
 }
 
 #create a new S3 Bucket
-resource "aws_s3_bucket" "my_bucket" {
+resource "aws_s3_bucket" "my_bucket" { 
   bucket = "bucket6960" # Ensure this is unique
-  acl    = "public-read"    # Defines the access control level
+  acl    = "private"    # Defines the access control level
 
   tags = {
     Name        = "My Terraform S3 Bucket"
