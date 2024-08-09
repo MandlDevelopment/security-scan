@@ -15,4 +15,4 @@ Prisma Cloud Access Key
 Prisma Cloud Secret Key
 
 ## About
-Made with ❤ in Dortmund
+
