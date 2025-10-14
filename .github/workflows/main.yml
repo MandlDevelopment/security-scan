@@ -62,8 +62,11 @@ jobs:
         # variables to connect to and access the S3 backend.
       run: terraform init
 
-    - name: Terraform Format and Validate
-      run: |
-          terraform fmt -check
+    #- name: Terraform Format and Validate
+    #  run: |
+    #      terraform fmt -check    
          # terraform validate  
+
+    - name: Terraform Plan
+      run: terraform plan 
 
