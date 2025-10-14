@@ -1,16 +1,4 @@
-name: Deploy Terraform to AWS
-
-on:
-  workflow_dispatch:
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-name: Cortex CLI Code Scan
+name: Deploy Terraform to AW
 
 on:
   push:
