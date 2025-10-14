@@ -10,7 +10,9 @@ env:
   CORTEX_API_KEY: ${{secrets.CORTEX_API_KEY}}
   CORTEX_API_KEY_ID: ${{secrets.CORTEX_API_KEY_ID}}
   CORTEX_API_URL: https://api-emea-ccr.xdr.eu.paloaltonetworks.com
-  
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_REGION: eu-west-1 # Define your target region  
 jobs:
   cortex-code-scan:
     runs-on: ubuntu-latest
@@ -51,32 +53,17 @@ jobs:
           --source "GITHUB_ACTIONS" \
           --create-repo-if-missing
 
-
-    #   # Only for public repos or enterprise accounts
-    #   # Uploads results.sarif to GitHub repository using the upload-sarif action
-    # - uses: github/codeql-action/upload-sarif@v2
-    #   with:
-    #       # Path to SARIF file relative to the root of the repository
-    #       sarif_file: results.sarif
-
-  
-    - name: Set up AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-north-1  # Adjust your AWS region
-
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: 1.7.0  # Specify your Terraform version
+    - name: Setup Terraform CLI
+      uses: hashicorp/setup-terraform@v3 
 
     - name: Terraform Init
+        # The 'terraform init' command will automatically use the 
+        # AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment 
+        # variables to connect to and access the S3 backend.
       run: terraform init
 
-    - name: Terraform Plan
-      run: terraform plan
+    - name: Terraform Format and Validate
+      run: |
+          terraform fmt -check
+          terraform validate  
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
