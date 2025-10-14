@@ -10,23 +10,59 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+name: Cortex CLI Code Scan
 
-    - name: Run Bridgecrew Action
-      id: Bridgecrew
-      uses: bridgecrewio/checkov-action@master
-      env:
-          PRISMA_API_URL: ${{ vars.PRISMA_API_URL }}
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  CORTEX_API_KEY: ${{secrets.CORTEX_API_KEY}}
+  CORTEX_API_KEY_ID: ${{secrets.CORTEX_API_KEY_ID}}
+  CORTEX_API_URL: https://api-emea-ccr.xdr.eu.paloaltonetworks.com
+  
+jobs:
+  cortex-code-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
       with:
-          api-key: ${{ secrets.PC_ACCESS_KEY }}::${{ secrets.PC_SECRET_KEY }}
-          quiet: true  # only show failed
-          file: /home/runner/work/security-scan/security-scan/service.tf
-          use_enforcement_rules: true # optional - use enforcement rule configs from the platform
-          
-    - name: Upload SARIF report
-      uses: actions/upload-artifact@v2
-      with:
-          name: SARIF results Checkov
-          path: results.sarif
+        node-version: 22
+
+    - name: Verify Node.js Version
+      run: node -v
+
+    - name: Download cortexcli
+      run: |
+        set -x
+        crtx_resp=$(curl "${CORTEX_API_URL}/public_api/v1/unified-cli/releases/download-link?os=linux&architecture=amd64" \
+          -H "x-xdr-auth-id: ${CORTEX_API_KEY_ID}" \
+          -H "Authorization: ${CORTEX_API_KEY}")
+        crtx_url=$(echo $crtx_resp | jq -r ".signed_url")
+        curl -o cortexcli $crtx_url
+        chmod +x cortexcli
+        ./cortexcli --version
+
+    - name: Run Cortex CLI Code Scan
+      run: |
+        ./cortexcli \
+          --api-base-url "${CORTEX_API_URL}" \
+          --api-key "${CORTEX_API_KEY}" \
+          --api-key-id "${CORTEX_API_KEY_ID}" \
+          code scan \
+          --directory "${{github.workspace}}" \
+          --repo-id "${{github.repository}}" \
+          --branch "${{github.ref_name}}" \
+          --source "GITHUB_ACTIONS" \
+          --create-repo-if-missing
+
 
     #   # Only for public repos or enterprise accounts
     #   # Uploads results.sarif to GitHub repository using the upload-sarif action
